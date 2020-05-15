@@ -1,20 +1,15 @@
 #!/bin/sh
+# For chromium install see also: https://github.com/scheib/chromium-latest-linux
+# For a buildpack example see also: https://github.com/Scalingo/ffmpeg-buildpack
 
 set -e
 
-# See also https://github.com/scheib/chromium-latest-linux
-# See also https://github.com/Scalingo/ffmpeg-buildpack
-
-indent() {
-  sed -u 's/^/       /'
-}
-
 BUILD_DIR=$1
 VENDOR_DIR="vendor"
-mkdir -p "$VENDOR_DIR"
-cd $VENDOR_DIR
 
 cd $BUILD_DIR
+mkdir -p "$VENDOR_DIR"
+cd $VENDOR_DIR
 
 echo "-----> Fetching latest Chromium"
 
@@ -27,3 +22,4 @@ curl -# $ZIP_URL > $ZIP_FILE
 
 echo "-----> Unzipping Chromium ${REVISION}"
 unzip $ZIP_FILE
+rm $ZIP_FILE
