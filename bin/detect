@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# This pack is valid for all apps.
+echo "chromium"
+exit 0

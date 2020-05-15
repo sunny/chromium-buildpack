@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+# See also https://github.com/scheib/chromium-latest-linux
+# See also https://github.com/Scalingo/ffmpeg-buildpack
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+BUILD_DIR=$1
+VENDOR_DIR="vendor"
+mkdir -p "$VENDOR_DIR"
+cd $VENDOR_DIR
+
+cd $BUILD_DIR
+
+echo "-----> Fetching latest Chromium"
+
+LASTCHANGE_URL="https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2FLAST_CHANGE?alt=media"
+REVISION=$(curl -s -S $LASTCHANGE_URL)
+ZIP_URL="https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F$REVISION%2Fchrome-linux.zip?alt=media"
+ZIP_FILE="${REVISION}-chrome-linux.zip"
+
+curl -# $ZIP_URL > $ZIP_FILE
+
+echo "-----> Unzipping Chromium ${REVISION}"
+unzip $ZIP_FILE
