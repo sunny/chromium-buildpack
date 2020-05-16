@@ -6,6 +6,7 @@ set -e
 
 BUILD_DIR=$1
 VENDOR_DIR="vendor"
+PROFILE_PATH="$BUILD_DIR/.profile.d/chrome.sh"
 
 cd $BUILD_DIR
 mkdir -p "$VENDOR_DIR"
@@ -20,6 +21,10 @@ ZIP_FILE="${REVISION}-chrome-linux.zip"
 
 curl -# $ZIP_URL > $ZIP_FILE
 
-echo "-----> Unzipping Chromium ${REVISION}"
+echo "       Unzipping Chromium ${REVISION}"
 unzip $ZIP_FILE
 rm $ZIP_FILE
+
+echo "       Exporting BROWSER_PATH"
+mkdir -p $(dirname $PROFILE_PATH)
+echo 'export BROWSER_PATH="/app/vendor/chrome-linux/chrome"' >> $PROFILE_PATH
