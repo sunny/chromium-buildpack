@@ -24,10 +24,10 @@ cd $VENDOR_DIR
 curl --silent $ZIP_URL > $ZIP_FILE
 
 echo "-----> Unzipping Chromium v${REVISION}"
-unzip $ZIP_FILE | indent
+unzip -q $ZIP_FILE | indent
 rm $ZIP_FILE
 
-echo "-----> Exporting Chromium paths"
+echo "-----> Updating PATH and BROWSER_PATH"
 mkdir -p $(dirname $PROFILE_PATH)
-echo 'export BROWSER_PATH="/app/vendor/chrome-linux/chrome"' >> $PROFILE_PATH
 echo 'export PATH="/app/vendor/chrome-linux:$PATH"' >> $PROFILE_PATH
+echo 'export BROWSER_PATH="/app/vendor/chrome-linux/chrome"' >> $PROFILE_PATH
