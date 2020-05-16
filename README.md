@@ -5,8 +5,8 @@ This project is a Scalingo buildpack for using Chrome in your project.
 It doesn't do anything else, you have to use it alongside another buildpack
 thanks to the [multi-buildpack](https://github.com/Scalingo/multi-buildpack).
 
-This buildpack provides a static build of the 2.8 version of FFmpeg downloaded
-from https://www.ffmpeg.org/download.html
+This buildpack provides a static build of the latest Linux build of Chromium
+downloaded from https://www.googleapis.com/
 
 Usage
 -----
