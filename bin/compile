@@ -21,13 +21,13 @@ ZIP_FILE="${REVISION}-chrome-linux.zip"
 
 mkdir -p "$VENDOR_DIR"
 cd $VENDOR_DIR
-curl --progress-bar $ZIP_URL > $ZIP_FILE
+curl --silent $ZIP_URL > $ZIP_FILE
 
-echo "Unzipping Chromium ${REVISION}" | indent
-unzip $ZIP_FILE
+echo "-----> Unzipping Chromium v${REVISION}"
+unzip $ZIP_FILE | indent
 rm $ZIP_FILE
 
-echo "Exporting paths" | indent
+echo "-----> Exporting Chromium paths"
 mkdir -p $(dirname $PROFILE_PATH)
 echo 'export BROWSER_PATH="/app/vendor/chrome-linux/chrome"' >> $PROFILE_PATH
 echo 'export PATH="/app/vendor/chrome-linux:$PATH"' >> $PROFILE_PATH
